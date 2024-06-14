@@ -1,87 +1,80 @@
-# meraki API task 3 (blog App)
+# AnswersAi Backend Service
 
-A Blog App with express and My SQL database.
+This repository contains the backend service for AnswersAi, a question-answering platform. This service is built on Node.js and Express.js and provides RESTful APIs for handling user questions, user authentication, and database interactions.
 
-## Features
+## Setup Instructions
 
-- API endpoints availabe as per user need
-- Authentication and Authorization
-- CRUD on User, Post
-- Like/Dislike a post
-- See all of your posts
-- See how many likes/dislikes post
+### Prerequisites
+- Node.js (v14 or higher)
+- MySQL database
+- Docker (if deploying with Docker)
+- Knex
 
-## Lesson Learned
+### Installation
 
-- CRUD operations with on SQL database locally
-- Fundamentals of express : FS modules, CRUD operations and middleware
-- Using the MVC (Model-View-Controller) architecture
-- Database operations (SQL)
-- JWT for authentication
+1. Clone this repository to your local machine:
+   - git clone https://github.com/PrinceGarg10/Prince-Garg-AnswersAi-Backend..git
 
-## Tech stacks
+2. Navigate to the project directory:
+   -cd <project-directory>
+   
+3. Install dependencies:
+    - `npm install or yarn`
+  
+### Environment Variables
 
-- NodeJS - JS runtime environment
-- Express - The web framework used
-- SQL - Local Database
-- PostgreSQL - object-relational database
-- JSON Web Token - Security Token
-- Postman - API testing
-- Knex - SQL query builder
-- Git - Version control system
+Copy the contents of the `.env.example` file to create a `.env` file in the root directory. Then, fill in the variables with appropriate values.
 
-## ScreenShots
 
-<img src="/screenShots/Screenshot1.png" width="49%"/> <img src="/screenShots/Screenshot2.png" width="49%"/>
+Replace `<your-chat-gpt-api-key>` and `<your-lang-chain-api-key>` with your actual API keys.
 
-## Setting Up Your Local Environment
+### Database Setup
 
-If you wish to play around with the code base in your local environment, do the following
+1. Create a MySQL database with the provided credentials (`MYSQL_USERNAME`, `MYSQL_PASSWORD`, `MYSQL_DATABASE`, `MYSQL_PORT`, `MYSQL_HOST`).
 
-```bash
-* Clone this repo to your local machine.
-* Using the terminal, navigate to the cloned repo.
-* Install all the neccessary dependencies, as stipulated in the package.json file.
-* Please ensure to have at least basic knowledge of how Postman work.
-* In your .env file, set environment variables for the following:'
-    * NODE_ENV=development
-    * PORT=3000
+2. Run database migrations to create necessary tables:
+   - `npm run migrate:make <migrate name>`
+   
+3. To apply the latest migrations to the database, run:
+   - `npm run migrate:latest`
 
-    * DB_USER=your-database-localhost
-    * DB_PASSWORD=your-database-password
 
-    * SECRET=your-json-web-token-secret
-    * JWT_EXPIRES_IN=90d
-    * JWT_COOKIE_EXPIRES_IN=90'
 
-* Complete the knex migration setup.
-* Start the server.
-* Your app should be running just fine.
-```
+## Running the Server
 
-Helpful commands
+To start the server, run:
+  - `npm start or yarn start`
 
-```bash
-$ git clone https://github.com/yourGitHubUsername/merakiCourses-MVC_03-blogApp
-$ cd merakiCourses-MVC_03-blogApp
-$ npm install
-$ knex migrate:latest
-$ knex seed:run
-$ npm run start_dev
-```
 
-## Optimizations
+The server will start on the specified port (default is 3000).
 
-- Arranged and grouped all the variables, functions, middleware as per bussiness rule.
-- Implemented MVC(Model-View-Controller) architecture
-- Proper organized module structure.
-- Populate database with seed data independent of migration files.
+## API Endpoints
 
-## API Features
+- **POST ${API_PREFIX}questions**: Accept user question and return AI-generated answer.
+- **GET ${API_PREFIX}questions/:questionId**: Retrieve specific question and answer by question ID.
+- **POST ${API_PREFIX}users**: Create a new user account.
+- **GET ${API_PREFIX}users/:userId**: Retrieve a user profile with a given userId.
+- **GET ${API_PREFIX}users/:userId/questions**: Retrieve all questions asked by user with a given userId.
 
-API Documentation can be Found [HERE](https://documenter.getpostman.com/view/20551158/2s8Ysrytti).
-Try to play around them😜.
+- **POST ${API_PREFIX}auth/login**: User login endpoint.
+- **POST ${API_PREFIX}auth/logout**: User logout endpoint.
+- **POST ${API_PREFIX}auth/refresh**: Refresh access token endpoint.
 
-## Author
+## Testing
+You can run unit tests using:
+  - npm test or yarn test
 
-- [@Pranav108](https://github.com/Pranav108/) 🙋‍♂️
+
+## Docker
+To containerize the application using Docker, you can use the provided Dockerfile. Ensure that Docker is installed on your system, and then build the Docker image:
+- `docker build -t answersai-backend .`
+
+After building the image, you can run a container:
+  - `docker run -p 3000:3000 answersai-backend`
+
+Replace `3000:3000` with the desired host and container port if needed.
+
+
+
+
+
