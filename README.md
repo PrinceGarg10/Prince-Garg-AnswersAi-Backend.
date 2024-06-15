@@ -4,7 +4,7 @@ This repository contains the backend service for AnswersAi, a question-answering
 
 ## Setup Instructions
 
-### Prerequisites
+### Pre-requisites
 - Node.js (v14 or higher)
 - MySQL database
 - Docker (if deploying with Docker)
